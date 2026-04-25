@@ -1,5 +1,7 @@
 import java.util.NoSuchElementException;
 
+import javax.imageio.IIOException;
+
 public class Pilha<E> {
 
 	private Celula<E> topo;
@@ -53,8 +55,24 @@ public class Pilha<E> {
 	 * @throws IllegalArgumentException se a pilha não contém numItens elementos.
 	 */
 	public Pilha<E> subPilha(int numItens) {
+
+		Pilha<E> pilha = new Pilha<>();
+		Pilha<E> copia = pilha;
+		Celula<E> atual = topo;
+
+		for (int i = 0; i < numItens; i++) {
+			if (atual == fundo) {
+				throw new Error("A pilha não contém a quantidade de itens");
+			}
+
+			copia.empilhar(pilha.desempilhar());
+			atual = atual.getProximo();
+		}
+
+		while (!copia.vazia()) {
+			pilha.empilhar(copia.desempilhar());
+		}
 		
-		// TODO
-		return null;
+		return copia;
 	}
 }

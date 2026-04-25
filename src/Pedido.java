@@ -159,4 +159,14 @@ public class Pedido implements Comparable<Pedido>{
     public Produto[] getProdutos() {
     	return produtos;
     }
+
+    public Object getTotalItens() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getTotalItens'");
+    }
+
+    public int getIdPrimeiroProduto() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getIdPrimeiroProduto'");
+    }
 }

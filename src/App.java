@@ -208,11 +208,16 @@ public class App {
      */
     public static void finalizarPedido(Pedido pedido) {
     	
-    	// TODO
+        pilhaPedidos.empilhar(pedido);
+
     }
     
-    public static void listarProdutosPedidosRecentes() {
-    	
+    public static void listarProdutosPedidosRecentes(Pedido pedido) {
+
+        
+
+        System.out.println();
+
     	// TODO
     }
     
@@ -235,7 +240,7 @@ public class App {
                 case 3 -> mostrarProduto(localizarProdutoDescricao());
                 case 4 -> pedido = iniciarPedido();
                 case 5 -> finalizarPedido(pedido);
-                case 6 -> listarProdutosPedidosRecentes();
+                case 6 -> listarProdutosPedidosRecentes(pedido);
             }
             pausa();
         }while(opcao != 0);       
