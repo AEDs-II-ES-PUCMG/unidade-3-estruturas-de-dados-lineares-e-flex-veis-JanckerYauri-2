@@ -9,6 +9,7 @@ public class App {
 
 	/** Nome do arquivo de dados. O arquivo deve estar localizado na raiz do projeto */
     static String nomeArquivoDados;
+    static String nomeArquivoPedidos = "pedidos.txt";
     
     /** Scanner para leitura de dados do teclado */
     static Scanner teclado;
@@ -21,6 +22,9 @@ public class App {
 
     /** Pilha de pedidos */
     static Pilha<Pedido> pilhaPedidos = new Pilha<>();
+
+    /** Fila de pedidos */
+    static Fila<Pedido> filaPedidos = new Fila<>();
         
     static void limparTela() {
         System.out.print("\033[H\033[2J");
@@ -207,22 +211,42 @@ public class App {
      * @param pedido O pedido que deve ser finalizado.
      */
     public static void finalizarPedido(Pedido pedido) {
-    	
-        pilhaPedidos.empilhar(pedido);
 
+        if (pedido == null) {
+            System.out.println("Não há pedido para finalizar!");
+            return;
+        } else {
+            System.out.println("Pedido finalizado");
+            empilharPedido(pedido);
+            enfileirarPedido(pedido);
+        }
     }
     
     public static void listarProdutosPedidosRecentes(Pedido pedido) {
 
-        
+        if (pilhaPedidos.vazia()) {
+            System.out.println("Não há pedidos para listar!");
+            return;
+        } else {
+            System.out.println("Produtos do pedido mais recente:");
+            pedido = pilhaPedidos.consultarTopo();
+            for (Produto produto : pedido.getProdutos()) {
+                System.out.println(produto);
+            }
+        }
 
-        System.out.println();
+    }
 
-    	// TODO
+    public static void empilharPedido(Pedido pedido) {
+        pilhaPedidos.empilhar(pedido);
+    }
+
+    public static void enfileirarPedido(Pedido pedido) {
+        filaPedidos.enfileirar(pedido);
     }
     
 	public static void main(String[] args) {
-		
+
 		teclado = new Scanner(System.in, Charset.forName("UTF-8"));
         
 		nomeArquivoDados = "produtos.txt";
